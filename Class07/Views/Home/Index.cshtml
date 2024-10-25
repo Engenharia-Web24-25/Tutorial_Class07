@@ -1,0 +1,33 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Web Engineering</h1>
+    <h2>This exercise is only to play a little with cookies and session variables</h2>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+
+<h1>Web cookies in request</h1>
+@if (Context.Request.Cookies.Count == 0)
+{
+    <div>No cookies were sent</div>
+}
+@foreach (var item in Context.Request.Cookies.Keys)
+{
+    <div>@item  - @Context.Request.Cookies[item]</div>
+}
+
+<h1>Session ID</h1>
+<div>The presentation of this value is used to confirm the reuse of the sessions:  <strong>@Context.Session.Id</strong></div>
+@foreach (var item in Context.Session.Keys)
+{
+    if (item == "StringValue")
+    {
+        <div>@item  - @Context.Session.GetString(item)</div>
+    }
+    else
+    {
+        <div>@item  - @Context.Session.GetInt32(item)</div>
+    }
+}
